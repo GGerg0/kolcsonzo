@@ -6,6 +6,12 @@ class Kolcsonzes:
         self.elperc = elperc
         self.visszaora = visszaora
         self.visszaperc = visszaperc
+    def __str__(self) -> str:
+        return f"{adatok[szam].elora}:{adatok[szam].elperc}-{adatok[szam].visszaora}:{adatok[szam].visszaperc}"
+
+def perc(ora,perc):
+    return int(ora*60+perc)
+
 
 f = open("kolcsonzesek.txt","rt",encoding="utf-8")
 
@@ -22,8 +28,19 @@ print(f"\t{innev} kölcsönzései:")
 tmp = 0
 for szam in range(1,len(adatok)):
     if adatok[szam].nev == innev:
-        print(f"\t\t{adatok[szam].elora}:{adatok[szam].elperc}-{adatok[szam].visszaora}:{adatok[szam].visszaperc}")
+        print(f"\t\t{adatok[szam]}")
         tmp += 1
     
 if tmp == 0:
     print("\t\tNem volt ilyen nevű kölcsönző!")
+
+ido = input("6. feladat:\tAdjon meg egy időpontot óra:perc alakban: ").split(":")
+
+
+ido = perc(int(ido[0]),int(ido[1]))
+
+for kolcson in range(1,len(adatok)):
+    kezdet = perc(int(adatok[kolcson].elora),int(adatok[kolcson].elperc))
+    veg = perc(int(adatok[kolcson].visszaora),int(adatok[kolcson].visszaperc))
+    if ido >= kezdet and ido < veg:
+        print(f"{adatok[kolcson]}\t:\t{adatok[kolcson].nev}")
