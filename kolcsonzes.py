@@ -19,8 +19,11 @@ print(f"5. feladat:\tNapi kölcsözések száma: {len(adatok)-1}")
 
 innev = input("6. feladat:\tKérek egy nevet: ")
 print(f"\t{innev} kölcsönzései:")
+tmp = 0
 for szam in range(1,len(adatok)):
     if adatok[szam].nev == innev:
         print(f"\t\t{adatok[szam].elora}:{adatok[szam].elperc}-{adatok[szam].visszaora}:{adatok[szam].visszaperc}")
-    else: 
-        print("Nem volt kölcsönzés")
+        tmp += 1
+    
+if tmp == 0:
+    print("\t\tNem volt ilyen nevű kölcsönző!")
